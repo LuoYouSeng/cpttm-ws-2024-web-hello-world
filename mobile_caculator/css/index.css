@@ -4,9 +4,16 @@
     font-family: sans-serif;
 }
 
+body {
+    height: 100vh;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
     width: 384px;
-    background-color: #222;
 }
 
 .screen {
@@ -29,18 +36,30 @@ button {
     border-radius: 9999px;
     border: 0;
     outline: 0;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: white;
     background-color: #3a3a3a;
+}
+
+button:active {
+    background-color: #2d2d2d;
 }
 
 button.operator {
     background-color: #ff9f0a;
 }
 
+button.operator:active {
+    background-color: #df8908;
+}
+
 button.three {
     background-color: #a5a5a5;
     color: #222;
+}
+
+button.three:active {
+    background-color: #808080;
 }
 
 .left, .right {
