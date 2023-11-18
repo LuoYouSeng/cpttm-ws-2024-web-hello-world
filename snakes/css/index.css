@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#playground {
+    width: 400px;
+    height: 800px;
+    border: 1px solid black;
+    position: relative;
+    background-image: url(../imgs/background.jpg);
+}
+
+.node {
+    position: absolute;
+    background-color: yellowgreen;
+    width: 40px;
+    height: 40px;
+}
+
+.head {
+    background-color: green !important;
+}
+
+.food {
+    background-color: red !important;
+}
