@@ -14,6 +14,8 @@ window.addEventListener('load', () => {
         map[i] = new Array(10).fill(0)
     }
 
+    var isGameOver = false
+
     var sx = 4, sy = 5, length = 1, direction = DIRECTION.RIGHT
 
     var fx = 8, fy = 2
@@ -51,6 +53,9 @@ window.addEventListener('load', () => {
             case DIRECTION.BOTTOM:
                 sy += 1
                 break
+        }
+        if(map[sy][sx] != 0 || sx > 9 || sx < 0 || sy < 0 || sy > 19) {
+            isGameOver = true
         }
     }
 
@@ -115,10 +120,13 @@ window.addEventListener('load', () => {
     input.focus()
 
     var loopTimer = setInterval(()=>{
-        handleInput()
-        update()
-        render()
+        if(!isGameOver) {
+            handleInput()
+            update()
+            render()
+        } else {
+            clearInterval(loopTimer)
+            alert('you lose')
+        }
     }, 350)
-
-    clearInterval(loopTimer)
 })
