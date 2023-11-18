@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <input type="number" id="len" placeholder="length">
+        <input type="button" id="btn" value="generate">
+        <h1 id="display"></h1>
+        <div>
+            <div>
+                <label for="upper">include Alpha Upper</label>
+                <input type="checkbox" id="upper">
+            </div>
+            <div>
+                <label for="lower">include Alpha lower</label>
+                <input type="checkbox" id="lower">
+            </div>
+            <div>
+                <label for="num">include Number</label>
+                <input type="checkbox" id="num">
+            </div>
+            <div>
+                <label for="symbol">include Symbol</label>
+                <input type="checkbox" id="symbol">
+            </div>
+        </div>
+        <script>
+            const len = document.querySelector('#len')
+            const btn = document.querySelector('#btn')
+            const display = document.querySelector('#display')
+            const isUpper = document.querySelector('#upper')
+            const isLower = document.querySelector('#lower')
+            const isNum = document.querySelector('#num')
+            const isSymbol = document.querySelector('#symbol')
+            const num = '0123456789'
+            const symbol = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+            const lower = 'abcdefghijklmnopqrstuvwxyz'
+            const upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+            btn.addEventListener('click', () => {
+                let strs = (isUpper.checked ? upper : '') + 
+                            (isLower.checked ? lower : '') + 
+                            (isNum.checked ? num : '') + 
+                            (isSymbol.checked ? symbol : '')
+                let s = ''
+                for(let i = 0;i < len.value; i ++) {
+                    let index = parseInt(Math.random() * strs.length - 1) + 1
+                    s += strs[index]
+                }
+                display.innerText = s;
+            })
+
+        </script>
+    </body>
+</html>
