@@ -7,16 +7,9 @@
     </head>
     <body>
         <script>
-            class Base {
-                constructor() {
-                    
-                }
-                p() {
-                    console.log(this.name)
-                }
-            }
-            var b = new Base()
-            var a = Base.bind(JSON.parse(JSON.stringify(b)))
+            (() =>{
+              console.log(123)  
+            })()
         </script>
     </body>
 </html>
