@@ -1,25 +1,18 @@
 <script setup>
-import { ref } from 'vue'
-import Todo from "@/models/todo.js"
+import { ref } from 'vue';
 
-const emit = defineEmits(["after-submit"])
+    const emit = defineEmits(['create'])
+    const input = ref('')
 
-const formData = ref(new Todo())
-
-function onSubmit() {
-	const todo = formData.value
-	// TODO: save todo
-
-	formData.value = new Todo()
-	emit("after-submit", todo)
-}
+    function handleClick() {
+        emit('create', input.value)
+        input.value = ''
+    }
 </script>
 
 <template>
-	<form @submit.prevent="onSubmit">
-
-		<input type="text" v-model="formData.name">
-		<input type="date" v-model="formData.date">
-		<button>Save</button>
-	</form>
+    <form>
+        <input v-model="input">
+        <button @click.prevent="handleClick">Save</button>
+    </form>
 </template>
