@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="520" height="400"></canvas>
+    <script>
+
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+        const width = canvas.width
+        const height = canvas.height
+
+        function ball(x = 0, y = 0, vx = 0, vy = 0, color = '#000', radius = 10) {
+            this.x = x
+            this.y = y
+            this.vx = vx
+            this.vy = vy
+            this.color = color
+            this.radius = radius
+            this.update = () => {
+                this.x += this.vx
+                this.y += this.vy
+                if (
+                    this.y + this.vy > height - this.radius ||
+                    this.y + this.vy < this.radius
+                ) {
+                    this.vy = -this.vy;
+                }
+                if (
+                    this.x + this.vx > width - this.radius ||
+                    this.x + this.vx < this.radius
+                ) {
+                    this.vx = -this.vx;
+                }
+            }
+        }
+
+        let ballList = []
+        let raf
+
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function init() {
+            let length = getRndInteger(10, 20)
+            for (let i = 0; i < length; i++) {
+                const r = getRndInteger(10, 15)
+                const b = new ball(
+                    getRndInteger(r, width),
+                    getRndInteger(r, height),
+                    getRndInteger(2, 4),
+                    getRndInteger(2, 4),
+                    '#' + Math.floor(Math.random() * 16777215).toString(16),
+                    r
+                )
+                ballList.push(b)
+            }
+        }
+
+        function drawBall(ball) {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fillStyle = ball.color;
+            ctx.fill();
+        }
+
+        function update() {
+            ctx.fillStyle = "rgb(255 255 255 / 30%)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ballList.forEach((ball) => {
+                ball.update()
+                drawBall(ball)
+            })
+            raf = window.requestAnimationFrame(update)
+        }
+
+        canvas.addEventListener("mouseover", (e) => {
+            raf = window.requestAnimationFrame(update);
+        })
+
+        canvas.addEventListener("mouseout", (e) => {
+            window.cancelAnimationFrame(raf);
+        })
+
+        init()
+
+    </script>
+</body>
+
+</html>
